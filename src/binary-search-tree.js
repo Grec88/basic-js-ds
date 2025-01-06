@@ -15,19 +15,55 @@ class BinarySearchTree {
     return this.rootNode;
   }
 
-  add(/* data */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  add(data) {
+    const newNode = new Node(data);
+
+    if (!this.rootNode) {
+      this.rootNode = newNode;
+    } else {
+      let current = this.rootNode;
+      while (true) {
+        if (data < current.data) {
+          if (!current.left) {
+            current.left = newNode;
+            break;
+          }
+          current = current.left;
+        } else {
+          if (!current.right) {
+            current.right = newNode;
+            break;
+          }
+          current = current.right;
+        }
+      }
+    }
   }
 
-  has(/* data */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  has(data) {
+    let current = this.rootNode;
+
+    while (current) {
+      if (data === current.data) {
+        return true;
+      }
+      current = data < current.data ? current.left : current.right;
+    }
+
+    return false;
   }
 
-  find(/* data */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  find(data) {
+    let current = this.rootNode;
+
+    while (current) {
+      if (data === current.data) {
+        return current;
+      }
+      current = data < current.data ? current.left : current.right;
+    }
+
+    return null;
   }
 
   remove(/* data */) {
@@ -40,7 +76,7 @@ class BinarySearchTree {
       return null;
     }
 
-    const current = this.rootNode;
+    let current = this.rootNode;
     while (current.left) {
       current = current.left;
     }
@@ -53,7 +89,7 @@ class BinarySearchTree {
       return null;
     }
 
-    const current = this.rootNode;
+    let current = this.rootNode;
     while (current.right) {
       current = current.right;
     }
